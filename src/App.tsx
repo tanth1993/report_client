@@ -1,14 +1,20 @@
-import logo from './logo.svg';
-import * as React from 'react'
 import './App.css';
+import logo from './logo.svg';
+import { hot } from 'react-hot-loader/root';
+import * as React from 'react'
 import { Header } from './components/Header'
+
 function App() {
+  React.useEffect(() => {
+    console.log('useEffect still works')
+
+  }, [])
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="App-header" style={{ padding: 50 }}>
         <img src={logo} className="App-logo" alt="logo" width="120" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          ok setting up for report Front-End
         </p>
         <a
           className="App-link"
@@ -18,10 +24,10 @@ function App() {
         </a>
       </header>
       <Header
-        name={'this prop is from App.tsx'}
+        name={'this prop is from App..tsx'}
       />
     </div>
   );
 }
 
-export default App;
+export default hot(App);
