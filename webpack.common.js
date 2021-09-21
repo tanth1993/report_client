@@ -4,7 +4,7 @@ const webpack = require('webpack');
 module.exports = {
     entry: "./src/index.tsx",
     output: {
-        assetModuleFilename: 'images/[name].[hash].[ext]'
+        assetModuleFilename: 'images/[name].[hash].[ext]',
     },
     module: {
         rules: [

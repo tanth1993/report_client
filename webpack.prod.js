@@ -40,7 +40,7 @@ module.exports = webpackMerge.merge(common, {
   module: {
     rules: [
       {
-        test: /\.s?css$/,
+        test: /\.s?[ac]ss$/,
         use: [
           MiniCssExtractPlugin.loader, //3. Extract css into files
           "css-loader", //2. Turns css into commonjs

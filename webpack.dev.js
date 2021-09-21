@@ -34,6 +34,7 @@ module.exports = webpackMerge.merge(common, {
   devServer: {
     compress: true,
     port: 3011,
+    historyApiFallback: true,
   }
 });
 

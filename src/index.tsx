@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import logo from './logo.svg';
+import logo from '@dev/assets/images/logo.png';
 
 let link: any = document.querySelector("link[rel~='icon']");
 if (!link) {

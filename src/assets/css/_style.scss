@@ -1,0 +1,31 @@
+@import './bootstrap';
+@import './variable';
+@import '../../layouts/layouts';
+
+.ml-auto{
+    margin-left: auto;
+}
+.mr-auto{
+    margin-right: auto;
+}
+.mx-10 {
+    margin: 0 10px;
+}
+.my-10 {
+    margin: 10px 0;
+}
+.direct-col{
+    flex-direction: column;
+}
+.direct-row{
+    flex-direction: row;
+}
+.justify-center{
+    justify-content: center;
+}
+.align-center{
+    align-items: center;
+}
+.pointer{
+    cursor: pointer;
+}
