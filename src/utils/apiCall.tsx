@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig, Method, AxiosError, AxiosResponse } from 'ax
 
 const port = 3099
 const baseURL = process.env.ENVIRONMENT === 'dev' ? `http://localhost:${port}/api/` : 'https://report-server-api.vercel.app/api/'
+
 const handleError = (error: AxiosError) => {
     if (error.response) {
         console.log(error.response.data);
@@ -11,6 +12,7 @@ const handleError = (error: AxiosError) => {
         console.log(error.message);
     }
 };
+
 const api_call = async (method: Method, body: any, url: string) => {
     const config: AxiosRequestConfig = {
         url,
@@ -21,7 +23,7 @@ const api_call = async (method: Method, body: any, url: string) => {
 
     try {
         const rsp = await axios(config)
-        return rsp
+        return rsp.data
     } catch (e) {
         handleError(e)
     }

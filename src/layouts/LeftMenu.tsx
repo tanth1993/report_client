@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classnames from 'classnames'
-import { IMenu } from '../interfaces/IMenu'
+import { IMenu } from '../interfaces'
 import { NavLink } from 'react-router-dom';
 import * as Paths from '@dev/utils/paths'
 

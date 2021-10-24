@@ -20,15 +20,15 @@ class Layout extends React.Component<RouteComponentProps<ILayoutProps>, ILayoutS
         }
     }
 
-    private unlisten: any
-    componentWillMount() {
-        this.unlisten = this.props.history.listen((location, action) => {
-            console.log("on route change");
-        });
-    }
-    componentWillUnmount() {
-        this.unlisten();
-    }
+    // private unlisten: any
+    // componentWillMount() {
+    //     this.unlisten = this.props.history.listen((location, action) => {
+    //         console.log("on route change");
+    //     });
+    // }
+    // componentWillUnmount() {
+    //     this.unlisten();
+    // }
 
     public render() {
         return <div className="body-wrapper">

@@ -1,0 +1,6 @@
+export { studentsRepo } from './studentsRepo'
+export { subjectsRepo } from './subjectsRepo'
+export { gradesRepo } from './gradesRepo'
+export { gradeTenScoreRepo } from './gradeTenScoreRepo'
+export { gradeElevenScoreRepo } from './gradeElevenScoreRepo'
+export { gradeTwelveScoreRepo } from './gradeTwelveScoreRepo'
