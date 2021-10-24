@@ -2,4 +2,6 @@
 npm run build && \
 git add . && \
 git commit -m "Build and Deploy" && \
-git fetch origin develop:master
+git push && \
+git fetch origin develop:master && \
+git push origin master
