@@ -1,9 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import testReducer from './testSlice'
+import subjectsReducer from './subjectsSlice'
 
 const rootReducer = combineReducers({
-    // put reducers from another files in here
-    testData: testReducer
+    subjectsReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

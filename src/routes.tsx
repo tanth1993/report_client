@@ -8,10 +8,13 @@ export const RoutesModule: React.FC<{}> = props => {
     return <Router>
         <Layout>
             <Switch>
-                <Route exact path={Paths.Home} component={Screens.Home} />
-                <Route exact path={Paths.Detail} component={Screens.Detail} />
+                <Redirect exact from="/" to={Paths.Overview} />
 
-                <Route component={Screens.Home} />
+                <Route exact path={Paths.Overview} component={Screens.Overview} />
+                <Route exact path={Paths.Grade} component={Screens.Grade} />
+                <Route exact path={Paths.Subject} component={Screens.Subject} />
+                <Route exact path={Paths.Student} component={Screens.Student} />
+
             </Switch>
         </Layout>
     </Router>

@@ -22,15 +22,19 @@ export const LeftMenu: React.FC<{}> = props => {
 
 const menulist: IMenu[] = [
     {
-        name: 'Main',
-        path: '/',
+        name: 'Tổng quan',
+        path: Paths.Overview,
     },
     {
-        name: 'Home',
-        path: Paths.Home,
+        name: 'Khối lớp',
+        path: Paths.Grade,
     },
     {
-        name: 'Detail',
-        path: Paths.Detail,
+        name: 'Môn học',
+        path: Paths.Subject,
+    },
+    {
+        name: 'Hồ sơ học sinh',
+        path: Paths.Student,
     },
 ]
