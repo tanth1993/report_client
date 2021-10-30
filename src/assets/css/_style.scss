@@ -2,6 +2,9 @@
 @import './variable';
 @import '../../layouts/layouts';
 
+a {
+    text-decoration: none;
+}
 .ml-auto{
     margin-left: auto;
 }

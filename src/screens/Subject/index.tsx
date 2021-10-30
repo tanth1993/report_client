@@ -1,6 +1,7 @@
 import './index.css'
 import * as React from 'react';
 import * as Repo from '@dev/repositories'
+import * as Utils from '@dev/utils'
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -46,6 +47,27 @@ export const Subject: React.FC<ISubject> = props => {
         <h3>chart</h3>
         <div className="">
             {renderChart()}
+        </div>
+        <div style={{ width: 70 }}>
+            {Utils.femaleAvt}
+        </div>
+        <div style={{ width: 70 }}>
+            {Utils.maleAvt}
+        </div>
+        <div style={{ width: 70 }}>
+            {Utils.notebookAvt}
+        </div>
+        <div style={{ width: 70 }}>
+            {Utils.overviewAvt}
+        </div>
+        <div style={{ width: 70 }}>
+            {Utils.userInfo}
+        </div>
+        <div style={{ width: 70 }}>
+            {Utils.bookAvt}
+        </div>
+        <div style={{ width: 70 }}>
+            {Utils.badageAvt}
         </div>
     </div>
 }

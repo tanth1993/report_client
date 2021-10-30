@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import { IMenu } from '../interfaces'
 import { NavLink } from 'react-router-dom';
 import * as Paths from '@dev/utils/paths'
+import * as Utils from '@dev/utils'
 
 export const LeftMenu: React.FC<{}> = props => {
 
@@ -24,17 +25,21 @@ const menulist: IMenu[] = [
     {
         name: 'Tổng quan',
         path: Paths.Overview,
+        icon: Utils.overviewAvt,
     },
     {
         name: 'Khối lớp',
         path: Paths.Grade,
+        icon: Utils.badageAvt,
     },
     {
         name: 'Môn học',
         path: Paths.Subject,
+        icon: Utils.bookAvt,
     },
     {
         name: 'Hồ sơ học sinh',
         path: Paths.Student,
+        icon: Utils.userInfo,
     },
 ]
