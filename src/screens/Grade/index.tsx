@@ -1,82 +1,46 @@
 import './index.css'
 import * as React from 'react';
-import * as Repo from '@dev/repositories';
-import Checkbox from '@mui/material/Checkbox';
-import { Pie, PieChart } from 'recharts'
+import * as MUI from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux'
+import { getGrades } from '@dev/store/gradesSlice';
+import { RootState } from '@dev/store/rootReducer';
+import * as Interfaces from '@dev/interfaces'
+
 interface IGrade {
 
 }
 
 export const Grade: React.FC<IGrade> = props => {
-    const renderChart = () => {
-        return <PieChart width={730} height={250}>
-            <Pie data={data01} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={50} fill="#8884d8" />
-            <Pie data={data02} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={60} outerRadius={80} fill="#82ca9d" label />
-        </PieChart>
+    const dispatch = useDispatch()
+    const [gradeId, setGradeId] = React.useState<string>('')
+    const grades: Interfaces.IGradeModel[] = useSelector((state: RootState) => state.gradesReducer.list)
+
+
+    React.useEffect(() => {
+        dispatch(getGrades())
+    }, [])
+
+    const handleChange = (e: MUI.SelectChangeEvent<string>) => {
+        setGradeId(e.target.value)
     }
 
-    return <div className="rp-grade">
-        <Checkbox defaultChecked />
-        <Checkbox />
-        <Checkbox disabled />
-        <Checkbox disabled checked />
-        <h3>Chart</h3>
-        <div className="">
-            {renderChart()}
+    const renderSelect = () => {
+        return <MUI.Select
+            className='default-font-size'
+            value={gradeId || ''}
+            onChange={(e) => handleChange(e)}
+            displayEmpty
+            placeholder='Vui lòng chọn'
+        >
+            {grades?.map(g => <MUI.MenuItem key={g?._id} value={g?._id}>{g?.name}</MUI.MenuItem>)}
+        </MUI.Select>
+    }
+
+    return <div className=" d-flex rp-wrapper">
+        <div className="rp-grade_control">
+            <span>Khối lớp</span>
+            {renderSelect()}
         </div>
     </div>
 }
-
-const data01 = [
-    {
-        "name": "Group A",
-        "value": 400
-    },
-    {
-        "name": "Group B",
-        "value": 300
-    },
-    {
-        "name": "Group C",
-        "value": 300
-    },
-    {
-        "name": "Group D",
-        "value": 200
-    },
-    {
-        "name": "Group E",
-        "value": 278
-    },
-    {
-        "name": "Group F",
-        "value": 189
-    }
-];
-const data02 = [
-    {
-        "name": "Group A",
-        "value": 2400
-    },
-    {
-        "name": "Group B",
-        "value": 4567
-    },
-    {
-        "name": "Group C",
-        "value": 1398
-    },
-    {
-        "name": "Group D",
-        "value": 9800
-    },
-    {
-        "name": "Group E",
-        "value": 3908
-    },
-    {
-        "name": "Group F",
-        "value": 4800
-    }
-];
 

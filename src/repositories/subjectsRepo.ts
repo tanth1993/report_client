@@ -7,5 +7,9 @@ export const subjectsRepo = {
         const path = '/subjects'
         return Utils.api_call_get(path)
     },
+    getAllGrades: (): Promise<Interfaces.ISubjectModel[]> => {
+        const path = '/grades'
+        return Utils.api_call_get(path)
+    },
 }
 
