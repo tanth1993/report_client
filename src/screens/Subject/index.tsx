@@ -6,7 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts';
+import { VictoryBar, VictoryChart, VictoryContainer } from 'victory'
 interface ISubject {
 
 }
@@ -18,15 +18,12 @@ export const Subject: React.FC<ISubject> = props => {
         setAge(event.target.value);
     };
     const renderChart = () => {
-        return <BarChart width={730} height={250} data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="pv" fill="#8884d8" />
-            <Bar dataKey="uv" fill="#82ca9d" />
-        </BarChart>
+        return <VictoryChart width={2000} height={400} domainPadding={{ x: 40 }} >
+            <VictoryBar
+
+                data={data}
+            />
+        </VictoryChart>
     }
 
     return <div className="rp-subject">
@@ -45,7 +42,7 @@ export const Subject: React.FC<ISubject> = props => {
             </Select>
         </FormControl>
         <h3>chart</h3>
-        <div className="">
+        <div className="" style={{ height: 500 }}>
             {renderChart()}
         </div>
         <div style={{ width: 70 }}>
@@ -73,39 +70,20 @@ export const Subject: React.FC<ISubject> = props => {
 }
 
 const data = [
-    {
-        "name": "Page A",
-        "uv": 4000,
-        "pv": 2400
-    },
-    {
-        "name": "Page B",
-        "uv": 3000,
-        "pv": 1398
-    },
-    {
-        "name": "Page C",
-        "uv": 2000,
-        "pv": 9800
-    },
-    {
-        "name": "Page D",
-        "uv": 2780,
-        "pv": 3908
-    },
-    {
-        "name": "Page E",
-        "uv": 1890,
-        "pv": 4800
-    },
-    {
-        "name": "Page F",
-        "uv": 2390,
-        "pv": 3800
-    },
-    {
-        "name": "Page G",
-        "uv": 3490,
-        "pv": 4300
-    }
+    { x: 'aa', y: 40 },
+    { x: 'bb', y: 24 },
+    { x: 'cc', y: 70 },
+    { x: 'dd', y: 66 },
+    { x: 'ee', y: 54 },
+    { x: 'aaa', y: 40 },
+    { x: 'bbb', y: 24 },
+    { x: 'ccc', y: 70 },
+    { x: 'ddd', y: 66 },
+    { x: 'eee', y: 54 },
+    { x: 'aaaa', y: 40 },
+    { x: 'bbbb', y: 24 },
+    { x: 'cccc', y: 70 },
+    { x: 'dddd', y: 66 },
+    { x: 'eeee', y: 54 },
+
 ]

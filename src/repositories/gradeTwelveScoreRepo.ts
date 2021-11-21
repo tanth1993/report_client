@@ -7,5 +7,9 @@ export const gradeTwelveScoreRepo = {
         const path = '/grade-twelve-score'
         return Utils.api_call_get(path)
     },
+    getAvgScores: (): Promise<Interfaces.ITotal<number>[]> => {
+        const path = '/grade-twelve-avg-scores'
+        return Utils.api_call_get(path)
+    },
 }
 

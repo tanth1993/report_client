@@ -10,7 +10,7 @@ interface ISubjectState {
 
 const initialState: ISubjectState = { isLoading: false, list: [] }
 
-const grades = createSlice({
+const gradeSlice = createSlice({
     name: 'subjects',
     initialState,
     reducers: {
@@ -26,8 +26,8 @@ const grades = createSlice({
     }
 })
 
-export const { getData, setIsLoading } = grades.actions
-export default grades.reducer
+export const { getData, setIsLoading } = gradeSlice.actions
+export default gradeSlice.reducer
 
 export const getGrades = (): AppThunk => async (dispatch) => {
     dispatch(setIsLoading(true))

@@ -1,3 +1,8 @@
+
+export type gradeNameTypes = 'ten' | 'eleven' | 'twelve'
+export type IData = {
+    [K in gradeNameTypes]: ITotal<number>[];
+};
 export interface IMenu {
     name?: string
     icon?: JSX.Element
@@ -31,4 +36,8 @@ export interface IGradeTenScoreModel {
     score?: number
     studentId?: string
 
+}
+export interface ITotal<T> {
+    _id?: T
+    total?: number
 }
