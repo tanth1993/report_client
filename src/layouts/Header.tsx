@@ -1,9 +1,18 @@
 import * as React from 'react';
 import logo from '@dev/assets/images/logo.png'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
+import { getSubjects } from '@dev/store/subjectsSlice';
+import { getGrades } from '@dev/store/gradesSlice';
+// import * as Repo from '@dev/repositories'
 
 
 export const Header: React.FC<{}> = props => {
+    const dispatch = useDispatch()
+    React.useEffect(() => {
+        dispatch(getSubjects())
+        dispatch(getGrades())
+    }, [])
 
     return <div className="header">
         <div className="row align-center">

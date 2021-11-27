@@ -1,7 +1,7 @@
 
 export type gradeNameTypes = 'ten' | 'eleven' | 'twelve'
 export type IData = {
-    [K in gradeNameTypes]: ITotal<number>[];
+    [K in gradeNameTypes]: ITotal<string>[];
 };
 export interface IMenu {
     name?: string
@@ -40,4 +40,9 @@ export interface IGradeTenScoreModel {
 export interface ITotal<T> {
     _id?: T
     total?: number
+}
+
+export interface IDataChart {
+    x?: string
+    y?: number
 }

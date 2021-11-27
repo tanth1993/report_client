@@ -7,7 +7,7 @@ export const gradeElevenScoreRepo = {
         const path = '/grade-eleven-score'
         return Utils.api_call_get(path)
     },
-    getAvgScores: (): Promise<Interfaces.ITotal<number>[]> => {
+    getAvgScores: (): Promise<Interfaces.ITotal<string>[]> => {
         const path = '/grade-eleven-avg-scores'
         return Utils.api_call_get(path)
     },

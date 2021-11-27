@@ -11,7 +11,7 @@ interface ISubjectState {
 const initialState: ISubjectState = { isLoading: false, list: [] }
 
 const gradeSlice = createSlice({
-    name: 'subjects',
+    name: 'grades',
     initialState,
     reducers: {
         getData: (state, action: PayloadAction<IGradeModel[]>) => {
@@ -31,6 +31,6 @@ export default gradeSlice.reducer
 
 export const getGrades = (): AppThunk => async (dispatch) => {
     dispatch(setIsLoading(true))
-    let rsp = await Repo.subjectsRepo.getAllGrades()
+    let rsp = await Repo.gradesRepo.getAllGrades()
     dispatch(getData(rsp))
 }
