@@ -1,4 +1,4 @@
-import './index.css'
+import './index.scss'
 import { IDataChart } from '@dev/interfaces';
 import * as React from 'react';
 import { Bar } from 'react-chartjs-2';

@@ -1,0 +1,13 @@
+.rp-chart {
+  background: #f8f8f8;
+  padding: 20px;
+}
+.rp-skeleton{
+  &_wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  }
+  &_item{
+    padding: 20px;
+  }
+}

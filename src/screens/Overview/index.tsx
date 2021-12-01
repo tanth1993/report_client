@@ -1,4 +1,4 @@
-import './index.css'
+import './index.scss'
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import * as Components from '@dev/components'
@@ -6,7 +6,6 @@ import { RootState } from '@dev/store/rootReducer';
 import { getAvgScorces, onResetState } from '@dev/store/overviewSlice';
 import * as Interfaces from '@dev/interfaces';
 import * as Utils from '@dev/utils'
-import Skeleton from '@mui/material/Skeleton';
 
 interface IOverview {
 
@@ -29,23 +28,12 @@ export const Overview: React.FC<IOverview> = props => {
         const data = convertToDataChart(dataObj[dataObjKey], subjects)
         return <Components.BarChartjs dataInput={data} label={label} title={title} />
     }
-    const renderSkeleton = () => {
-        return <div className="">
-            <Skeleton animation="wave" />
-        </div>
-    }
     return !isLoading ? <div className="rp-overview">
-        {renderChart('twelve', 'Khối lớp 12', 'Điểm trung bình các môn theo khối lớp 12')}
-        {renderChart('eleven', 'Khối lớp 11', 'Điểm trung bình các môn theo khối lớp 11')}
-        {renderChart('ten', 'Khối lớp 10', 'Điểm trung bình các môn theo khối lớp 10')}
+        {renderChart('twelve', '', 'Điểm trung bình các môn theo khối lớp 12')}
+        {renderChart('eleven', '', 'Điểm trung bình các môn theo khối lớp 11')}
+        {renderChart('ten', '', 'Điểm trung bình các môn theo khối lớp 10')}
     </div>
-        : <>
-            {renderSkeleton()}
-            {renderSkeleton()}
-            {renderSkeleton()}
-            {renderSkeleton()}
-            {renderSkeleton()}
-        </>
+        : <Components.SkeletonSection numberItem={2} />
 }
 
 function convertToDataChart(data: Interfaces.ITotal<string>[], subjects: Interfaces.ISubjectModel[]) {

@@ -1,0 +1,19 @@
+.rp-overview {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 20px;
+}
+.rp-chart.bar-chart{
+    &:nth-child(1) {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+    &:nth-child(2) {
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+    &:nth-child(3) {
+        grid-column-start: 2;
+        grid-column-end: 3;
+    }
+}
