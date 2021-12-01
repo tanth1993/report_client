@@ -8,10 +8,11 @@ interface IBarChartjs {
     dataInput?: IDataChart[]
     height?: number
     label?: string
+    title?: string
 }
 
 export const BarChartjs: React.FC<IBarChartjs> = props => {
-    const { dataInput = [{ x: '1', y: 12, }, { x: '2', y: 55, }, { x: '6', y: 88, }], height = 300, children, label = '' } = props
+    const { dataInput = [{ x: '1', y: 12, }, { x: '2', y: 55, }, { x: '6', y: 88, }], height = 300, children, label = '', title } = props
 
     const renderChart = () => {
         return <Bar
@@ -31,6 +32,9 @@ export const BarChartjs: React.FC<IBarChartjs> = props => {
         />
     }
     return <div className="rp-chart bar-chart">
-        {renderChart()}
+        {title && <h4>{title}</h4>}
+        <div className="">
+            {renderChart()}
+        </div>
     </div>
 }

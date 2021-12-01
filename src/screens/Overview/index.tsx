@@ -6,6 +6,7 @@ import { RootState } from '@dev/store/rootReducer';
 import { getAvgScorces, onResetState } from '@dev/store/overviewSlice';
 import * as Interfaces from '@dev/interfaces';
 import * as Utils from '@dev/utils'
+import Skeleton from '@mui/material/Skeleton';
 
 interface IOverview {
 
@@ -15,7 +16,6 @@ export const Overview: React.FC<IOverview> = props => {
     const dispatch = useDispatch()
     const dataObj = useSelector((state: RootState) => state.overviewSlice.data)
     const subjects = useSelector((state: RootState) => state.subjectsReducer.list)
-    const grades = useSelector((state: RootState) => state.gradesReducer.list)
     const isLoading = useSelector((state: RootState) => state.overviewSlice.isLoading)
 
     React.useEffect(() => {
@@ -25,25 +25,27 @@ export const Overview: React.FC<IOverview> = props => {
         }
     }, [])
 
-    const renderChart = (dataObjKey: Interfaces.gradeNameTypes, label: string) => {
+    const renderChart = (dataObjKey: Interfaces.gradeNameTypes, label: string, title: string) => {
         const data = convertToDataChart(dataObj[dataObjKey], subjects)
-        return <Components.BarChartjs dataInput={data} label={label} />
+        return <Components.BarChartjs dataInput={data} label={label} title={title} />
     }
-
+    const renderSkeleton = () => {
+        return <div className="">
+            <Skeleton animation="wave" />
+        </div>
+    }
     return !isLoading ? <div className="rp-overview">
-        <div className="">
-            {renderChart('twelve', 'Khối lớp 12')}
-        </div>
-        <div className="d-flex">
-            <div style={{ flex: 1 }}>
-                {renderChart('eleven', 'Khối lớp 11')}
-            </div>
-            <div style={{ flex: 1 }}>
-                {renderChart('ten', 'Khối lớp 10')}
-            </div>
-        </div>
+        {renderChart('twelve', 'Khối lớp 12', 'Điểm trung bình các môn theo khối lớp 12')}
+        {renderChart('eleven', 'Khối lớp 11', 'Điểm trung bình các môn theo khối lớp 11')}
+        {renderChart('ten', 'Khối lớp 10', 'Điểm trung bình các môn theo khối lớp 10')}
     </div>
-        : <span>'Loading...........................!!!!!!!!!!!!!!!!!!!!!!,Loading...........................!!!!!!!!!!!!!!!!!!!!!!'</span>
+        : <>
+            {renderSkeleton()}
+            {renderSkeleton()}
+            {renderSkeleton()}
+            {renderSkeleton()}
+            {renderSkeleton()}
+        </>
 }
 
 function convertToDataChart(data: Interfaces.ITotal<string>[], subjects: Interfaces.ISubjectModel[]) {
