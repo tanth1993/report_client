@@ -3,6 +3,9 @@ export type gradeNameTypes = 'ten' | 'eleven' | 'twelve'
 export type IData = {
     [K in gradeNameTypes]: ITotal<string>[];
 };
+export type ItemData<K extends string, V> = {
+    [Key in K]: V
+}
 export interface IMenu {
     name?: string
     icon?: JSX.Element
@@ -27,6 +30,7 @@ export interface IGradeModel {
     _id?: string
     gradeId?: string
     name?: string
+    number?: number
 }
 
 export interface IGradeTenScoreModel {
@@ -45,4 +49,9 @@ export interface ITotal<T> {
 export interface IDataChart {
     x?: string
     y?: number
+}
+export interface IQuery {
+    isMale?: boolean | string
+    gradeId?: number
+    subjectId?: string
 }

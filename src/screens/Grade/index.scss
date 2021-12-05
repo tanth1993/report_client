@@ -1,0 +1,12 @@
+.rp-grade{
+    display: grid;
+    gap: 20px;
+    
+    &_control{
+        display: flex;
+    }
+}
+.rp-selection{
+    min-width: 100px;
+    margin-left: 10px;
+}
