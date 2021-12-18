@@ -17,7 +17,25 @@ export const BarChartjs: React.FC<IBarChartjs> = props => {
     const renderChart = () => {
         return <Bar
             height={height}
-            options={{ maintainAspectRatio: false, scales: {} }}
+            options={{
+                maintainAspectRatio: false,
+                responsive: true,
+                scales: {
+                    y: {
+                        suggestedMax: 10,
+                        ticks: {
+                            callback: (value) => {
+                                return value + ' điểm'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false //This will do the task
+                    }
+                }
+            }}
             data={{
                 datasets: [{
                     label: label,

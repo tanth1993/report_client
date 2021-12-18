@@ -63,7 +63,7 @@ export const Grade: React.FC<IGrade> = props => {
         }) ?? []
         const sortedData: Interfaces.IDataChart[] = Utils.sortDataByNames(dataChart, 'x')
 
-        return <LineChartVISX dataInput={sortedData} title='Điểm trung bình theo các môn học' />
+        return <LineChartVISX dataInput={sortedData} title='Điểm trung bình của toàn học sinh theo các môn học' />
     }
 
     const renderChartByMale = () => {
@@ -76,7 +76,7 @@ export const Grade: React.FC<IGrade> = props => {
         }) ?? []
         const sortedData: Interfaces.IDataChart[] = Utils.sortDataByNames(dataChart, 'x')
 
-        return <LineChartVISX dataInput={sortedData} title='Điểm trung bình theo các môn học' />
+        return <LineChartVISX dataInput={sortedData} title='Điểm trung bình của học sinh nam' />
     }
     const renderChartByFemale = () => {
         const dataChart: Interfaces.IDataChart[] = avgScoresByGenderFemale?.map(a => {
@@ -88,7 +88,7 @@ export const Grade: React.FC<IGrade> = props => {
         }) ?? []
         const sortedData: Interfaces.IDataChart[] = Utils.sortDataByNames(dataChart, 'x')
 
-        return <LineChartVISX dataInput={sortedData} title='Điểm trung bình theo các môn học' />
+        return <LineChartVISX dataInput={sortedData} title='Điểm trung bình của học sinh nữ' />
     }
 
     return <div className="rp-grade">
