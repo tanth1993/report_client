@@ -57,7 +57,6 @@ const gradeSlice = createSlice({
             state.isLoadingData = action.payload
             return state
         },
-
     }
 })
 
@@ -67,6 +66,7 @@ export default gradeSlice.reducer
 export const getGrades = (): AppThunk => async (dispatch) => {
     dispatch(setIsLoading(true))
     let rsp = await Repo.gradesRepo.getAllGrades()
+    rsp.sort((a, b) => (a?.number ?? 0) - (b?.number ?? 0))
     dispatch(setData(rsp))
 }
 

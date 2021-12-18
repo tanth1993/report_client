@@ -11,3 +11,18 @@
     padding: 20px;
   }
 }
+.rp-tooltip{
+  &_content{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    white-space: pre;
+    & span{
+      flex-shrink: 0;
+    }
+    &>span:first-child {
+      height: 12px;
+      width: 12px;
+    }
+  }
+}
