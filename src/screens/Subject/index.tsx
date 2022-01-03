@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { useHistory, useLocation, useParams } from 'react-router';
 import { getSubjects, getAvgScoresData, getAvgScoresDataScaleByGrade } from '@dev/store/subjectsSlice';
-import { BarChartVictory, PieChartVictory } from '@dev/components'
+import { BarChartVictory, PieChartVictory, SkeletonSection } from '@dev/components'
 import * as Interfaces from '@dev/interfaces'
 
 interface ISubject {
@@ -16,7 +16,7 @@ export const Subject: React.FC<ISubject> = props => {
     const dispatch = Utils.useAppDispatch()
     const history = useHistory()
     const location = useLocation()
-    const { list: subjects, avgScores, avgScoresByGrade10, avgScoresByGrade11, avgScoresByGrade12, isLoading } = Utils.useAppSelector((state) => state.subjectsReducer)
+    const { list: subjects, avgScores, avgScoresByGrade10, avgScoresByGrade11, avgScoresByGrade12, isLoadingData } = Utils.useAppSelector((state) => state.subjectsReducer)
 
     const { subjectId: subjectQuery } = Utils.parseQuerytoObj(location.search?.split('?')[1]) as Interfaces.IQuery || {}
     const grades = Utils.useAppSelector((state) => state.gradesReducer.list)
@@ -90,7 +90,6 @@ export const Subject: React.FC<ISubject> = props => {
             return {
                 x: d?._id + '',
                 y: d?.total,
-                // label: 'Điểm ' + d?._id,
             }
         })
 
@@ -98,10 +97,10 @@ export const Subject: React.FC<ISubject> = props => {
         return <PieChartVictory dataInput={convertData} title={title} />
     }
 
-    return <div className="rp-subject">
+    return !isLoadingData ? <div className="rp-subject">
         <div className="rp-subject_control">
             <h3>Thống kê thành tích theo môn học</h3>
-            {!isLoading && renderSelect()}
+            {renderSelect()}
         </div>
         <div className="rp-wrapper_chart">
             {renderChart()}
@@ -112,5 +111,6 @@ export const Subject: React.FC<ISubject> = props => {
             </div>
         </div>
     </div>
+        : <SkeletonSection />
 }
 
