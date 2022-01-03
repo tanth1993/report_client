@@ -3,11 +3,10 @@ import * as React from 'react';
 import * as MUI from '@mui/material';
 import { useHistory, useLocation, useParams } from 'react-router';
 import { getGrades, getAvgScoresData, getAvgScoresDataByGender } from '@dev/store/gradesSlice';
-// import { RootState } from '@dev/store/rootReducer';
 import * as Interfaces from '@dev/interfaces'
 import { serializeObj, useAppDispatch, useAppSelector, parseQuerytoObj } from '@dev/utils'
 import * as Utils from '@dev/utils'
-import { LineChartVISX } from '@dev/components/LineChartVISX';
+import { LineChartVISX } from '@dev/components';
 
 interface IGrade {
 

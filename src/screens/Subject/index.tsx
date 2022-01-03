@@ -1,89 +1,71 @@
-import './index.css'
+import './index.scss'
 import * as React from 'react';
-import * as Repo from '@dev/repositories'
 import * as Utils from '@dev/utils'
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { VictoryBar, VictoryChart, VictoryContainer } from 'victory'
+import { useHistory, useLocation, useParams } from 'react-router';
+import { getSubjects, getAvgScoresData } from '@dev/store/subjectsSlice';
+import { BarChartVictory } from '@dev/components'
+import * as Interfaces from '@dev/interfaces'
+
 interface ISubject {
 
 }
 
 export const Subject: React.FC<ISubject> = props => {
-    const [age, setAge] = React.useState('');
+    const dispatch = Utils.useAppDispatch()
+    const history = useHistory()
+    const location = useLocation()
+    const { subjectId: subjectQuery } = Utils.parseQuerytoObj(location.search?.split('?')[1]) as Interfaces.IQuery || {}
+    const { list: subjects, avgScores, avgScoresByGrade10, avgScoresByGrade11, avgScoresByGrade12, isLoadingData } = Utils.useAppSelector((state) => state.subjectsReducer)
 
-    const handleChange = (event: any) => {
-        setAge(event.target.value);
-    };
+    const [subjectId, setSubjectId] = React.useState<string>(subjectQuery || "")
+
+
+    React.useEffect(() => {
+        const query = Utils.serializeObj({ subjectId })
+        dispatch(getAvgScoresData(subjectId))
+        history.replace({ pathname: location.pathname, search: query })
+    }, [subjectId])
+
+    React.useEffect(() => {
+        dispatch(getSubjects())
+    }, [])
+
+    const handleChange = (e: any) => {
+        setSubjectId(e.target.value)
+    }
+    const renderSelect = () => {
+        return <Select
+            className='rp-selection'
+            value={subjectId}
+            onChange={(e) => handleChange(e)}
+            displayEmpty
+            placeholder='Vui lòng chọn'
+        >
+            {subjects?.map(s => <MenuItem key={s?.subjectId} value={s?.subjectId}>{s?.subjectNameVN}</MenuItem>)}
+        </Select>
+    }
     const renderChart = () => {
-        return <VictoryChart width={2000} height={400} domainPadding={{ x: 40 }} >
-            <VictoryBar
 
-                data={data}
-            />
-        </VictoryChart>
+        return <BarChartVictory
+            title='điểm trung bình môn học theo 3 khối'
+        />
+    }
+    const renderChartByGrade = () => {
+        return
     }
 
     return <div className="rp-subject">
-        <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
-            <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={age}
-                label="Age"
-                onChange={handleChange}
-            >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-        </FormControl>
-        <h3>chart</h3>
-        <div className="" style={{ height: 500 }}>
+        <div className="rp-subject_control">
+            <h3>Thống kê thành tích theo môn học</h3>
+            {renderSelect()}
+        </div>
+        <div className="rp-wrapper_chart">
             {renderChart()}
-        </div>
-        <div style={{ width: 70 }}>
-            {Utils.femaleAvt}
-        </div>
-        <div style={{ width: 70 }}>
-            {Utils.maleAvt}
-        </div>
-        <div style={{ width: 70 }}>
-            {Utils.notebookAvt}
-        </div>
-        <div style={{ width: 70 }}>
-            {Utils.overviewAvt}
-        </div>
-        <div style={{ width: 70 }}>
-            {Utils.userInfo}
-        </div>
-        <div style={{ width: 70 }}>
-            {Utils.bookAvt}
-        </div>
-        <div style={{ width: 70 }}>
-            {Utils.badageAvt}
+            <div className="rp-gender_chart">
+            </div>
         </div>
     </div>
 }
 
-const data = [
-    { x: 'aa', y: 40 },
-    { x: 'bb', y: 24 },
-    { x: 'cc', y: 70 },
-    { x: 'dd', y: 66 },
-    { x: 'ee', y: 54 },
-    { x: 'aaa', y: 40 },
-    { x: 'bbb', y: 24 },
-    { x: 'ccc', y: 70 },
-    { x: 'ddd', y: 66 },
-    { x: 'eee', y: 54 },
-    { x: 'aaaa', y: 40 },
-    { x: 'bbbb', y: 24 },
-    { x: 'cccc', y: 70 },
-    { x: 'dddd', y: 66 },
-    { x: 'eeee', y: 54 },
-
-]

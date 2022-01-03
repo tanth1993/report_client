@@ -1,4 +1,4 @@
-import './index.css'
+import './index.scss'
 import * as React from 'react';
 import * as Repo from '@dev/repositories'
 import Radio from '@mui/material/Radio';
