@@ -3,6 +3,7 @@ export { api_call_get, api_call_put, api_call_delete, api_call_post } from './ap
 export { femaleAvt, maleAvt, badageAvt, bookAvt, notebookAvt, overviewAvt, userInfo } from './svg'
 export { useAppDispatch, useAppSelector } from './hooks'
 
+export const colorList = ['#ffb800', '#ff8a00', '#00b2ff', '#2979ff', '#22c993', '#fc625d', '#2c3e50', '#ecf0f1', '#2ecc71', '#ccc']
 export const sortDataByNames = (data: any[], key: string) => {
     return [...data]?.sort((a: any, b: any) => (a[key]?.toLocaleLowerCase() ?? 'a') > (b[key]?.toLocaleLowerCase() ?? 'b') ? -1 : 1)
 }

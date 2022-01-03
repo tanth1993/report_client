@@ -1,7 +1,7 @@
 import './index.scss'
 import { IDataChart } from '@dev/interfaces';
 import * as React from 'react';
-import { VictoryBar, VictoryChart, VictoryContainer } from 'victory'
+import { VictoryBar, VictoryChart, VictoryTooltip, VictoryAxis } from 'victory'
 
 interface IBarChartVictory {
     dataInput?: IDataChart[]
@@ -12,12 +12,32 @@ interface IBarChartVictory {
     width?: number
 }
 export const BarChartVictory: React.FC<IBarChartVictory> = props => {
-    const { dataInput = data, height = 500, title, color = '#2979ff', width = 2000 } = props
+    const { dataInput = data, height = 400, title, color = '#2979ff', width = 1200 } = props
 
     const renderChart = () => {
-        return <VictoryChart width={width} height={height} domainPadding={{ x: 40 }} >
+        return <VictoryChart
+            animate={{ duration: 400, onLoad: { duration: 100 } }}
+            width={width}
+            height={height}
+            padding={{ left: 70, top: 30, bottom: 50, right: 70 }}
+            domainPadding={{ x: 150 }}
+            domain={{ y: [0, 10] }}
+        >
+            <VictoryAxis />
             <VictoryBar
+                style={{
+                    data: { fill: color }
+                }}
                 data={dataInput}
+                labels={({ datum }) => (`${datum.y} điểm`)}
+                labelComponent={<VictoryTooltip constrainToVisibleArea flyoutPadding={15} />}
+            />
+            <VictoryAxis
+                dependentAxis
+                tickFormat={d => {
+                    return d + ' điểm'
+                }}
+                tickValues={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
             />
         </VictoryChart>
     }
