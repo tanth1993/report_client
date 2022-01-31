@@ -33,9 +33,9 @@ export const Subject: React.FC<ISubject> = props => {
         history.replace({ pathname: location.pathname, search: query })
     }, [subjectId])
 
-    React.useEffect(() => {
-        dispatch(getSubjects())
-    }, [])
+    // React.useEffect(() => {
+    //     dispatch(getSubjects())
+    // }, [])
 
 
     const getDataByGradeId = (gradeId: number) => {

@@ -24,7 +24,7 @@ const api_call = async (method: Method, body: any, url: string) => {
     try {
         const rsp = await axios(config)
         return rsp.data
-    } catch (e) {
+    } catch (e: any) {
         handleError(e)
     }
 }

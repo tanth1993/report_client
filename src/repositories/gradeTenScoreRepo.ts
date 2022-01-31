@@ -3,7 +3,7 @@ import * as Interfaces from '@dev/interfaces'
 
 
 export const gradeTenScoreRepo = {
-    getScore: (): Promise<Interfaces.IGradeTenScoreModel[]> => {
+    getScore: (): Promise<Interfaces.IGradeScoreModel[]> => {
         const path = '/grade-ten-score'
         return Utils.api_call_get(path)
     },

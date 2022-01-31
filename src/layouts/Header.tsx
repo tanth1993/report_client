@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { getSubjects } from '@dev/store/subjectsSlice';
 import { getGrades } from '@dev/store/gradesSlice';
-// import * as Repo from '@dev/repositories'
+import { getStudents } from '@dev/store/studentsSlice';
+
 
 
 export const Header: React.FC<{}> = props => {
@@ -12,6 +13,7 @@ export const Header: React.FC<{}> = props => {
     React.useEffect(() => {
         dispatch(getSubjects())
         dispatch(getGrades())
+        dispatch(getStudents('', 1))
     }, [])
 
     return <div className="header">

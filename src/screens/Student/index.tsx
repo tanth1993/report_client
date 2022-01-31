@@ -1,17 +1,45 @@
 import './index.scss'
 import * as React from 'react';
-import * as Repo from '@dev/repositories'
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import { Legend, PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart } from 'recharts'
+
+import Select from '@mui/material/Select';
+import { useHistory, useLocation, useParams } from 'react-router';
+import * as Utils from '@dev/utils'
+import * as Interfaces from '@dev/interfaces'
+import MenuItem from '@mui/material/MenuItem';
+import { getStudentScoreByGrade } from '@dev/store/studentsSlice';
+
 interface IStudent {
 
 }
 
 export const Student: React.FC<IStudent> = props => {
+    const dispatch = Utils.useAppDispatch()
+    const history = useHistory()
+    const location = useLocation()
+    const { dataPaging } = Utils.useAppSelector((state) => state.studentsSlice)
+    const { studentId: studentStrId } = Utils.parseQuerytoObj(location.search?.split('?')[1]) as Interfaces.IStudentQuery || {}
+
+    const [studentId, setSelectedStudentId] = React.useState<string>(studentStrId || dataPaging?.data?.[0]?.studentId || "")
+
+    React.useEffect(() => {
+        const query = Utils.serializeObj({ studentId })
+        dispatch(getStudentScoreByGrade(studentId, 10))
+        dispatch(getStudentScoreByGrade(studentId, 11))
+        dispatch(getStudentScoreByGrade(studentId, 12))
+        history.replace({ pathname: location.pathname, search: query })
+    }, [studentId])
+
+    // React.useEffect(() => {
+    //     dispatch(getStudents('', 1))
+
+    // }, [])
+
+
+    const handleChange = (e: any) => {
+        setSelectedStudentId(e.target.value)
+    }
+
     const renderChart = () => {
         return <RadarChart outerRadius={90} width={730} height={250} data={data}>
             <PolarGrid />
@@ -23,19 +51,20 @@ export const Student: React.FC<IStudent> = props => {
         </RadarChart>
 
     }
+    const renderSelect = () => {
+        return <Select
+            className='rp-selection'
+            value={studentId}
+            onChange={(e) => handleChange(e)}
+            displayEmpty
+            placeholder='Vui lòng chọn'
+        >
+            {dataPaging?.data?.map(s => <MenuItem key={s?.studentId} value={s?.studentId}>{s?.name}</MenuItem>)}
+        </Select>
+    }
 
     return <div className="rp-student">
-        <FormControl component="fieldset">
-            <FormLabel component="legend">Gender</FormLabel>
-            <RadioGroup
-                aria-label="gender"
-                defaultValue="female"
-                name="radio-buttons-group"
-            >
-                <FormControlLabel value="female" control={<Radio />} label="Female" />
-                <FormControlLabel value="male" control={<Radio />} label="Male" />
-            </RadioGroup>
-        </FormControl>
+        {renderSelect()}
         <h3>Chart</h3>
         <div className="">
             {renderChart()}

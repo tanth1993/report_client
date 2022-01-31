@@ -33,7 +33,7 @@ export interface IGradeModel {
     number?: number
 }
 
-export interface IGradeTenScoreModel {
+export interface IGradeScoreModel {
     _id?: string
     gradeId?: string
     subjectId?: string
@@ -55,4 +55,14 @@ export interface IQuery {
     isMale?: boolean | string
     gradeId?: number
     subjectId?: string
+}
+export interface IPaginationData<T> {
+    data?: T
+    totalCount?: number
+}
+export interface IStudentQuery extends IQuery {
+    text?: string
+    page?: number
+    pageSize?: number
+    studentId?: string
 }
