@@ -39,7 +39,6 @@ export interface IGradeScoreModel {
     subjectId?: string
     score?: number
     studentId?: string
-
 }
 export interface ITotal<T> {
     _id?: T
@@ -65,4 +64,9 @@ export interface IStudentQuery extends IQuery {
     page?: number
     pageSize?: number
     studentId?: string
+}
+export interface IScoreBySubject {
+    subjectId?: string
+    score?: number
+    subjectName?: string
 }

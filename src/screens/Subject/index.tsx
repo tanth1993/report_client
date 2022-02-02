@@ -3,10 +3,11 @@ import * as React from 'react';
 import * as Utils from '@dev/utils'
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import { useHistory, useLocation, useParams } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { getSubjects, getAvgScoresData, getAvgScoresDataScaleByGrade } from '@dev/store/subjectsSlice';
 import { BarChartVictory, PieChartVictory, SkeletonSection } from '@dev/components'
 import * as Interfaces from '@dev/interfaces'
+import * as Paths from '@dev/utils/paths'
 
 interface ISubject {
 
@@ -33,9 +34,10 @@ export const Subject: React.FC<ISubject> = props => {
         history.replace({ pathname: location.pathname, search: query })
     }, [subjectId])
 
-    // React.useEffect(() => {
-    //     dispatch(getSubjects())
-    // }, [])
+    React.useEffect(() => {
+        if (!subjectId) history.replace({ pathname: Paths.Overview })
+        // dispatch(getSubjects())
+    }, [])
 
 
     const getDataByGradeId = (gradeId: number) => {

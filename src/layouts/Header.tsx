@@ -19,9 +19,9 @@ export const Header: React.FC<{}> = props => {
     return <div className="header">
         <div className="row align-center">
             <div className="logo"><Link to={'/'}><img src={logo} alt='logo' /></Link></div>
-            <div className="wrapper_navigation">
+            {/* <div className="wrapper_navigation">
                 link link link
-            </div>
+            </div> */}
         </div>
         {/* *************** Breadcrumb **************** */}
         {/* <div className="breadcrumb">
