@@ -57,10 +57,17 @@ const gradeSlice = createSlice({
             state.isLoadingData = action.payload
             return state
         },
+
+        onResetState: (state) => {
+            state.avgScores = []
+            state.avgScoresByGenderFemale = []
+            state.avgScoresByGenderMale = []
+            return state
+        },
     }
 })
 
-export const { setData, setIsLoading, setAvgScores, setIsLoadingData, setAvgScoresByFemale, setAvgScoresByMale } = gradeSlice.actions
+export const { setData, setIsLoading, setAvgScores, setIsLoadingData, setAvgScoresByFemale, setAvgScoresByMale, onResetState } = gradeSlice.actions
 export default gradeSlice.reducer
 
 export const getGrades = (): AppThunk => async (dispatch) => {

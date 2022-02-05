@@ -5,7 +5,8 @@ import * as Paths from '@dev/utils/paths'
 import { useHistory, useLocation } from 'react-router';
 import * as Utils from '@dev/utils'
 import * as Interfaces from '@dev/interfaces'
-import { getStudentScoreByGrade } from '@dev/store/studentsSlice';
+import { getStudentScoreByGrade, onResetState } from '@dev/store/studentsSlice';
+import { InfoSection } from './InfoSection';
 
 interface IStudent {
 
@@ -15,30 +16,31 @@ export const Student: React.FC<IStudent> = props => {
     const dispatch = Utils.useAppDispatch()
     const history = useHistory()
     const location = useLocation()
-    const { dataPaging, scoreSubjectsInGrade10, scoreSubjectsInGrade11, scoreSubjectsInGrade12, isLoadingData } = Utils.useAppSelector((state) => state.studentsSlice)
-    const { studentId } = Utils.parseQuerytoObj(location.search?.split('?')[1]) as Interfaces.IStudentQuery || {}
+    const { dataPaging, scoreSubjectsInGrade10, scoreSubjectsInGrade11, scoreSubjectsInGrade12, isLoadingData, isLoading } = Utils.useAppSelector((state) => state.studentsSlice)
+    const { studentId: studentStrId } = Utils.parseQuerytoObj(location.search?.split('?')[1]) as Interfaces.IStudentQuery || {}
     const subjects = Utils.useAppSelector((state) => state.subjectsReducer.list)
-    const defaultStudentItem = dataPaging?.data?.find(d => d?.studentId === studentId)
 
-    const [studentItem, setSelectedStudentItem] = React.useState(defaultStudentItem || dataPaging?.data?.[0])
+    const [studentId, setSelectedStudentId] = React.useState<string>(studentStrId || dataPaging?.data?.[0]?.studentId || "")
 
     React.useEffect(() => {
-        const query = Utils.serializeObj({ studentId: studentItem?.studentId })
-        dispatch(getStudentScoreByGrade(studentItem?.studentId, 10))
-        dispatch(getStudentScoreByGrade(studentItem?.studentId, 11))
-        dispatch(getStudentScoreByGrade(studentItem?.studentId, 12))
+        const query = Utils.serializeObj({ studentId })
+        dispatch(getStudentScoreByGrade(studentId, 10))
+        dispatch(getStudentScoreByGrade(studentId, 11))
+        dispatch(getStudentScoreByGrade(studentId, 12))
         history.replace({ pathname: location.pathname, search: query })
-    }, [studentItem])
+    }, [studentId])
 
     React.useEffect(() => {
-        if (!studentItem) history.replace({ pathname: Paths.Overview })
-        // dispatch(getSubjects())
+        if (!studentId) history.replace({ pathname: Paths.Overview })
+        return () => {
+            dispatch(onResetState())
+        }
     }, [])
 
 
     const handleChange = (e: any, item: Interfaces.IStudentModel) => {
         if (!item) return
-        setSelectedStudentItem(item)
+        setSelectedStudentId(item?.studentId || '')
     }
     const getDataByGradeId = (gradeId: number) => {
         type TypeObj = {
@@ -53,6 +55,12 @@ export const Student: React.FC<IStudent> = props => {
 
         return obj[gradeId] || []
     }
+
+    const renderInfoSection = () => {
+        const item = dataPaging?.data?.find(d => d?.studentId === studentId);
+        return <InfoSection item={item} />
+    }
+
     const renderChartByGrade = (gradeId: number) => {
         const data = [...getDataByGradeId(gradeId)]
 
@@ -68,22 +76,23 @@ export const Student: React.FC<IStudent> = props => {
 
     const renderSelect = () => {
         return <AutocompleteMUI
-            data={dataPaging?.data}
-            value={studentItem}
+            data={[...(dataPaging?.data || [])]}
+            value={studentId}
             placeholder='Nhập tên có dấu'
             onChange={(e, item: Interfaces.IStudentModel) => handleChange(e, item)}
         />
     }
 
-    return <div className="rp-student">
+    return !isLoading ? <div className="rp-student">
         {renderSelect()}
-
+        {renderInfoSection()}
         <div className="rp-gender_chart">
             {renderChartByGrade(10)}
             {renderChartByGrade(11)}
             {renderChartByGrade(12)}
         </div>
     </div>
+        : <SkeletonSection />
 }
 
 

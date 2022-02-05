@@ -1,8 +1,8 @@
 import './index.scss'
 import * as React from 'react';
 import * as MUI from '@mui/material';
-import { useHistory, useLocation, useParams } from 'react-router';
-import { getGrades, getAvgScoresData, getAvgScoresDataByGender } from '@dev/store/gradesSlice';
+import { useHistory, useLocation } from 'react-router';
+import { getGrades, getAvgScoresData, getAvgScoresDataByGender, onResetState } from '@dev/store/gradesSlice';
 import * as Interfaces from '@dev/interfaces'
 import { serializeObj, useAppDispatch, useAppSelector, parseQuerytoObj } from '@dev/utils'
 import * as Utils from '@dev/utils'
@@ -35,6 +35,9 @@ export const Grade: React.FC<IGrade> = props => {
 
     React.useEffect(() => {
         dispatch(getGrades())
+        return () => {
+            dispatch(onResetState())
+        }
     }, [])
 
     const handleChange = (e: any) => {

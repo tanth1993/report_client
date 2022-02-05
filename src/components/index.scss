@@ -1,5 +1,7 @@
+@use '../assets/css/variable' as v;
+
 .rp-chart {
-  background: #f8f8f8;
+  background: v.$backgroundBox;
   padding: 20px;
 }
 .rp-skeleton{

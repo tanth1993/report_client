@@ -24,7 +24,7 @@ export const RadarRechartsJS: React.FC<IRadarRechartsJS> = props => {
                 <Radar dataKey={'score'} stroke={color} fill={color} fillOpacity={0.6} isAnimationActive={true} />
                 <Tooltip formatter={(value: number, name: string, props: any) => [value, 'Điểm']} />
                 <Legend
-                    wrapperStyle={{ position: 'relative', width: 152 }}
+                    wrapperStyle={{ position: 'relative', width: 170 }}
                     iconType={'square'}
                     payload={data.map(d => ({ value: `${d.subjectName}: ${d.score}`, type: 'square', id: d.subjectId, color: color, }))}
                 />

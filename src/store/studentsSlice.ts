@@ -55,10 +55,16 @@ const studentsSlice = createSlice({
             state.isLoadingData = action.payload
             return state
         },
+        onResetState: (state) => {
+            state.scoreSubjectsInGrade10 = []
+            state.scoreSubjectsInGrade11 = []
+            state.scoreSubjectsInGrade12 = []
+            return state
+        },
     }
 })
 
-export const { setData, setIsLoading, setIsLoadingData, setScoreSubjectsInGrade10, setScoreSubjectsInGrade11, setScoreSubjectsInGrade12 } = studentsSlice.actions
+export const { setData, setIsLoading, setIsLoadingData, setScoreSubjectsInGrade10, setScoreSubjectsInGrade11, setScoreSubjectsInGrade12, onResetState } = studentsSlice.actions
 export default studentsSlice.reducer
 
 export const getStudents = (text: string, page: number, pageSize: number = 10): AppThunk => async (dispatch) => {

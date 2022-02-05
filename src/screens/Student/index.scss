@@ -1,3 +1,20 @@
-.rp-student{
-    
+@use '../../assets/css/variable' as v;
+
+.rp-info {
+  margin-top: 20px;
+  background: v.$backgroundBox;
+  padding: 20px 40px;
+  display: inline-flex;
+  &_avt {
+        width: 180px;
+        margin-right: 15px;
+    }
+  .rp-info_meta{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    &_section>*{
+            margin: 0;
+        }
+    }
 }
