@@ -7,31 +7,26 @@ import { Legend, PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, 
 interface IRadarRechartsJS {
     data?: IScoreBySubject[]
     height?: number
-    label?: string
     title?: string
     color?: string
     width?: number
+    isLoading?: boolean
 }
 export const RadarRechartsJS: React.FC<IRadarRechartsJS> = props => {
-    const { data = defaultData, height = 400, title, color = '#2979ff', width = '100%' } = props
-
+    const { data = defaultData, height = 400, title, color = '#2979ff', width = '100%', isLoading } = props
 
     const renderChart = () => {
         return data?.length > 0 && <ResponsiveContainer width={width} height={height} >
-            <RadarChart data={data} className={'rp-recharts'} outerRadius={170}>
+            <RadarChart data={[...data]} className={'rp-recharts'} outerRadius={170}>
                 <PolarGrid />
                 <PolarAngleAxis dataKey="subjectName" />
-                <PolarRadiusAxis domain={[0, 10]}
-                    tickCount={6}
-                />
-                <Radar dataKey={'score'} stroke={color} fill={color} fillOpacity={0.6} />
-                <Tooltip
-                    formatter={(value: number, name: string, props: any) => [value, 'Điểm']}
-                />
+                <PolarRadiusAxis domain={[0, 10]} tickCount={6} />
+                <Radar dataKey={'score'} stroke={color} fill={color} fillOpacity={0.6} isAnimationActive={true} />
+                <Tooltip formatter={(value: number, name: string, props: any) => [value, 'Điểm']} />
                 <Legend
                     wrapperStyle={{ position: 'relative', width: 152 }}
                     iconType={'square'}
-                    payload={data.map(d => { return { value: `${d.subjectName}: ${d.score}`, type: 'square', id: d.subjectId, color: color, } })}
+                    payload={data.map(d => ({ value: `${d.subjectName}: ${d.score}`, type: 'square', id: d.subjectId, color: color, }))}
                 />
             </RadarChart>
         </ResponsiveContainer>
