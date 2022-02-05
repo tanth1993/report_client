@@ -1,7 +1,7 @@
 import './index.scss'
 import { IScoreBySubject } from '@dev/interfaces';
 import * as React from 'react';
-import { Legend, PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer } from 'recharts'
+import { Legend, PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer, Tooltip } from 'recharts'
 
 
 interface IRadarRechartsJS {
@@ -17,17 +17,24 @@ export const RadarRechartsJS: React.FC<IRadarRechartsJS> = props => {
 
 
     const renderChart = () => {
-        return <ResponsiveContainer width={width} height={height}>
-            <RadarChart data={data}>
+        return data?.length > 0 && <ResponsiveContainer width={width} height={height} >
+            <RadarChart data={data} className={'rp-recharts'} outerRadius={170}>
                 <PolarGrid />
                 <PolarAngleAxis dataKey="subjectName" />
-                <PolarRadiusAxis domain={[0, 10]} tickCount={6} />
+                <PolarRadiusAxis domain={[0, 10]}
+                    tickCount={6}
+                />
                 <Radar dataKey={'score'} stroke={color} fill={color} fillOpacity={0.6} />
-                {/* <Radar name="Lily" dataKey="B" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} /> */}
-                {/* <Legend /> */}
+                <Tooltip
+                    formatter={(value: number, name: string, props: any) => [value, 'Điểm']}
+                />
+                <Legend
+                    wrapperStyle={{ position: 'relative', width: 152 }}
+                    iconType={'square'}
+                    payload={data.map(d => { return { value: `${d.subjectName}: ${d.score}`, type: 'square', id: d.subjectId, color: color, } })}
+                />
             </RadarChart>
         </ResponsiveContainer>
-
     }
 
     return <div className="rp-chart">

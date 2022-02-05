@@ -55,15 +55,15 @@ export const Student: React.FC<IStudent> = props => {
     }
     const renderChartByGrade = (gradeId: number) => {
         const data = [...getDataByGradeId(gradeId)]
-        const sortData = data?.length > 0 ? (data || [])?.sort((a, b) => (a?._id || 0) < (b?._id || 0) ? -1 : 1) : []
 
-        const dataChart: Interfaces.IScoreBySubject[] = sortData.map(d => {
+        const dataChart: Interfaces.IScoreBySubject[] = data.map(d => {
             const subjectItem = subjects?.find(s => s?.subjectId === d?.subjectId) ?? {}
             return { score: d.score, subjectId: d.subjectId, subjectName: subjectItem?.subjectNameVN ?? '' }
         })
-        console.log(dataChart);
+        const sortedData: Interfaces.IScoreBySubject[] = dataChart?.sort((a, b) => (a?.subjectName?.toLocaleLowerCase() || 0) > (b?.subjectName?.toLocaleLowerCase() || 0) ? -1 : 1)
+
         const title = `Điểm trung bình các môn ở khối ${gradeId}`
-        return <RadarRechartsJS title={title} />
+        return <RadarRechartsJS title={title} data={sortedData} />
     };
 
     const renderSelect = () => {
