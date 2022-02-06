@@ -8,30 +8,39 @@ interface IAutocompleteMUI {
     inputValue?: string
     indexNameKey?: string
     indexValueKey?: string
-    value?: any
+    value?: any[]
     onChange?: (event: React.SyntheticEvent, value: any) => void
     onInputChange?: (event: React.SyntheticEvent, value: string, reason: string) => void
+    onBlur?: () => void
+    onFocus?: () => void
 }
 
 export const AutocompleteMUI: React.FC<IAutocompleteMUI> = (props) => {
-    const { placeholder = 'unknown', data = [], children, indexNameKey = 'name',
-        onChange, value, onInputChange, inputValue,
-        indexValueKey = 'studentId' } = props
-    const valueItem = data?.find(d => d[indexValueKey] === value);
+    const { placeholder = 'unknown', data = [], children, indexNameKey = 'name', indexValueKey = 'studentId',
+        onChange, value, onInputChange, inputValue = '', onBlur, onFocus,
+    } = props
+
     return (
         <Autocomplete
+            // multiple
             disablePortal
-            value={valueItem}
+            freeSolo={true}
+            defaultValue={''}
+            autoHighlight
+            // value={valueItem}
             isOptionEqualToValue={(opt, val) => opt[indexValueKey] === val[indexValueKey]}
             options={data}
             getOptionLabel={(opt) => opt[indexNameKey] || ''}
 
             sx={{ width: 400 }}
-            inputValue={valueItem?.[indexNameKey]}
+            inputValue={inputValue}
             onChange={onChange}
-
             onInputChange={onInputChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onClose={onBlur}
             renderInput={(params) => <TextField {...params} label={placeholder} inputProps={{ ...params.inputProps }} />}
+
         />
     )
 }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as Interfaces from '@dev/interfaces'
-import { femaleAvt, maleAvt } from '@dev/utils';
+import { dateLocaleVNFormatter, femaleAvt, maleAvt } from '@dev/utils';
 ;
 
 
@@ -23,6 +23,7 @@ export const InfoSection: React.FC<IInfoSection> = props => {
     const renderInfoMeta = () => {
         const studentIdStr = prefixId + (studentId?.split('-')?.[0]?.toLocaleUpperCase() || '')
         const genderStr = isMale ? "Nam" : "Nữ"
+        const dateInVN = dateLocaleVNFormatter(birthday)
         return <div className="rp-info_meta">
             {/* studentId */}
             <div className="rp-info_meta_section">
@@ -39,7 +40,7 @@ export const InfoSection: React.FC<IInfoSection> = props => {
             {/* birthday  */}
             <div className="rp-info_meta_section">
                 <h4>Ngày sinh</h4>
-                <p>{birthday}</p>
+                <p>{dateInVN}</p>
             </div>
 
             {/* gender  */}

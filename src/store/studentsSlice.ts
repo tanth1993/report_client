@@ -5,6 +5,7 @@ import * as Interfaces from '@dev/interfaces'
 
 interface ISubjectState {
     dataPaging: Interfaces.IPaginationData<Interfaces.IStudentModel[]>
+    dataQueryPaging: Interfaces.IPaginationData<Interfaces.IStudentModel[]>
     scoreSubjectsInGrade10: Interfaces.IGradeScoreModel[]
     scoreSubjectsInGrade11: Interfaces.IGradeScoreModel[]
     scoreSubjectsInGrade12: Interfaces.IGradeScoreModel[]
@@ -14,6 +15,7 @@ interface ISubjectState {
 
 const initialState: ISubjectState = {
     dataPaging: { data: [], totalCount: 0 },
+    dataQueryPaging: { data: [], totalCount: 0 },
     scoreSubjectsInGrade10: [],
     scoreSubjectsInGrade11: [],
     scoreSubjectsInGrade12: [],
@@ -29,6 +31,10 @@ const studentsSlice = createSlice({
         setData: (state, action: PayloadAction<Interfaces.IPaginationData<Interfaces.IStudentModel[]>>) => {
             state.dataPaging = action.payload
             state.isLoading = false
+            return state
+        },
+        setDataQuery: (state, action: PayloadAction<Interfaces.IPaginationData<Interfaces.IStudentModel[]>>) => {
+            state.dataQueryPaging = action.payload
             return state
         },
         setScoreSubjectsInGrade10: (state, action: PayloadAction<Interfaces.IGradeScoreModel[]>) => {
@@ -64,7 +70,7 @@ const studentsSlice = createSlice({
     }
 })
 
-export const { setData, setIsLoading, setIsLoadingData, setScoreSubjectsInGrade10, setScoreSubjectsInGrade11, setScoreSubjectsInGrade12, onResetState } = studentsSlice.actions
+export const { setData, setIsLoading, setIsLoadingData, setScoreSubjectsInGrade10, setScoreSubjectsInGrade11, setScoreSubjectsInGrade12, onResetState, setDataQuery } = studentsSlice.actions
 export default studentsSlice.reducer
 
 export const getStudents = (text: string, page: number, pageSize: number = 10): AppThunk => async (dispatch) => {
@@ -73,6 +79,13 @@ export const getStudents = (text: string, page: number, pageSize: number = 10): 
     dispatch(setIsLoading(true))
     let rsp = await Repo.studentsRepo.getStudentsByQuery(query)
     dispatch(setData(rsp))
+}
+
+export const getStudentsByQuery = (text: string, page: number, pageSize: number = 10): AppThunk => async (dispatch) => {
+    const query: Interfaces.IStudentQuery = { page, pageSize, text }
+
+    let rsp = await Repo.studentsRepo.getStudentsByQuery(query)
+    dispatch(setDataQuery(rsp))
 }
 
 export const getStudentScoreByGrade = (studentId?: string, gradeId?: number): AppThunk => async (dispatch) => {
