@@ -1,3 +1,5 @@
+@use '../assets/css/variable' as v;
+
 .rp-subject{
     display: grid;
     gap: 20px;
@@ -5,8 +7,10 @@
     &_control{
         display: flex;
         h3{
-            font-size: 1rem;
-            flex: 1;
+            @include v.phone{
+                font-size: 1rem;
+                flex: 1;
+            }
         }
     }
 }
