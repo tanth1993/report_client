@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/tanth1993/source-base-react/issues"
   },
-  "homepage": "https://github.com/tanth1993/source-base-react#readme",
+  "homepage": "https://report-client.vercel.app/",
   "devDependencies": {
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
