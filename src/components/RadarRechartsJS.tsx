@@ -24,7 +24,7 @@ export const RadarRechartsJS: React.FC<IRadarRechartsJS> = props => {
                 <PolarAngleAxis dataKey="subjectName" />
                 <PolarRadiusAxis domain={[0, 10]} tickCount={6} />
                 <Radar dataKey={'score'} stroke={color} fill={color} fillOpacity={0.6} isAnimationActive={true} />
-                <Tooltip formatter={(value: number, name: string, props: any) => [value, 'Điểm']} />
+                <Tooltip formatter={(value: number) => [value, 'Điểm']} />
                 <Legend
                     wrapperStyle={{ position: 'relative', width: 170 }}
                     iconType={'square'}

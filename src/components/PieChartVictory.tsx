@@ -13,7 +13,7 @@ interface IPieChartVictory {
     width?: number
 }
 export const PieChartVictory: React.FC<IPieChartVictory> = props => {
-    const { dataInput = data, height = 400, title, color = '#2979ff', width = 400 } = props
+    const { dataInput = data, height = 400, title, width = 400 } = props
 
     const renderChart = () => {
         return <VictoryPie
