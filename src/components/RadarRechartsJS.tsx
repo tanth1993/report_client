@@ -2,6 +2,7 @@ import './index.scss'
 import { IScoreBySubject } from '@dev/interfaces';
 import * as React from 'react';
 import { Legend, PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer, Tooltip } from 'recharts'
+import { responsiveThreshold } from '@dev/utils';
 
 
 interface IRadarRechartsJS {
@@ -12,12 +13,13 @@ interface IRadarRechartsJS {
     width?: number
     isLoading?: boolean
 }
+const isMobile = window.innerWidth < responsiveThreshold
 export const RadarRechartsJS: React.FC<IRadarRechartsJS> = props => {
-    const { data = defaultData, height = 400, title, color = '#2979ff', width = '100%', isLoading } = props
+    const { data = defaultData, height = 400, title, color = '#2979ff', width = '100%' } = props
 
     const renderChart = () => {
         return data?.length > 0 && <ResponsiveContainer width={width} height={height} >
-            <RadarChart data={[...data]} className={'rp-recharts'} outerRadius={170}>
+            <RadarChart data={[...data]} className={'rp-recharts'} outerRadius={isMobile ? 120 : 170}>
                 <PolarGrid />
                 <PolarAngleAxis dataKey="subjectName" />
                 <PolarRadiusAxis domain={[0, 10]} tickCount={6} />

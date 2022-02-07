@@ -3,6 +3,11 @@
 .rp-chart {
   background: v.$backgroundBox;
   padding: 20px;
+  h4{
+    @include v.phone{
+      font-size: 0.8rem;
+    }
+  }
 }
 .rp-skeleton{
   &_wrapper{
@@ -31,10 +36,30 @@
 .rp-recharts {
   display: flex;
   align-items: center;
-  & .recharts-default-legend {
-    text-align: left !important;
+  @include v.phone{
+    flex-direction: column;
   }
-  & .recharts-legend-item-text {
+  .recharts-legend-wrapper{
+    @include v.phone{
+      width: 100% !important;
+    }
+  }
+  .recharts-default-legend {
+    text-align: left !important;
+    
+    .recharts-legend-item{
+      min-width: 80px;
+    }
+    @include v.phone{
+      font-size: 0.7rem;
+    }
+  }
+  .recharts-legend-item-text {
     color: #000 !important;
+  }
+}
+@include v.phone{
+  .recharts-polar-angle-axis-tick-value {
+    font-size: 12px;
   }
 }

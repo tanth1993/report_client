@@ -1,13 +1,18 @@
 
 .body-wrapper{
-    padding: 0px 40px 0 100px;
+    @include desktop{
+        padding: 0px 40px 0 100px;
+    }
+    @include phone {
+        padding: 0px 15px;
+    }
 }
 .header{
     min-height: 70px;
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    // align-items: flex-start;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
     .logo {
         width: 200px;
         margin-right: auto;
@@ -18,9 +23,6 @@
 }
 .row.align-center{
     padding: 0 10px;
-    @include phone {
-        flex-direction: column;
-    }
 }
 .hamburger_menu{
     display: none;
@@ -33,6 +35,9 @@
     margin: 10px 20px;
 }
 .left-menu {
+    & >a{
+        color: inherit;
+    }
     @include desktop{
         position: fixed;
         top: 0;
@@ -44,9 +49,7 @@
         background: #fff;
         padding: 85px 0 0 0;
         overflow: hidden;
-        & >a{
-            color: inherit;
-        }
+       
         & .left-menu_item_name{
             opacity: 0;
         }
@@ -61,6 +64,12 @@
     }
     @include phone {
         display: none;
+    }
+}
+.MuiDrawer-root {
+    .left-menu {
+        display: block;
+        margin-top: 50px;
     }
 }
 .left-menu_item {
@@ -111,13 +120,11 @@ a.active .left-menu_item {
         top: 5px;
     }
 }
-.wrapper_navigation{
+.header_wrapper{
     @include phone{
-        display: flex;
-        align-items: center;
         align-self: stretch;
         justify-content: space-between;
-        padding: 0 10px;
+        // padding: 0 10px;
     }
 
 }
@@ -129,10 +136,5 @@ a.active .left-menu_item {
         @include phone{
             margin: 0 5px;
         }
-    }
-}
-.content{
-    @include phone{
-        margin: 10px 20px;
     }
 }

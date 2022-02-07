@@ -8,6 +8,7 @@ export const sortDataByNames = (data: any[], key: string) => {
     return [...data]?.sort((a: any, b: any) => (a[key]?.toLocaleLowerCase() ?? 'a') > (b[key]?.toLocaleLowerCase() ?? 'b') ? -1 : 1)
 }
 
+export const responsiveThreshold = 769
 export const IsNullOrEmpty = (value: any) => {
     if (value === 0) {
         return false;

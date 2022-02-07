@@ -1,7 +1,8 @@
 import './index.scss'
 import { IDataChart } from '@dev/interfaces';
 import * as React from 'react';
-import { VictoryBar, VictoryChart, VictoryTooltip, VictoryAxis } from 'victory'
+import { VictoryBar, VictoryChart, VictoryTooltip, VictoryAxis, VictoryContainer } from 'victory'
+import { responsiveThreshold } from '@dev/utils';
 
 interface IBarChartVictory {
     dataInput?: IDataChart[]
@@ -11,17 +12,19 @@ interface IBarChartVictory {
     color?: string
     width?: number
 }
+const isMobile = window.innerWidth < responsiveThreshold
 export const BarChartVictory: React.FC<IBarChartVictory> = props => {
     const { dataInput = data, height = 400, title, color = '#2979ff', width = 1200 } = props
 
     const renderChart = () => {
         return <VictoryChart
             animate={{ duration: 400, onLoad: { duration: 100 } }}
-            width={width}
+            width={!isMobile ? width : undefined}
             height={height}
             padding={{ left: 70, top: 30, bottom: 50, right: 70 }}
             domainPadding={{ x: 150 }}
             domain={{ y: [0, 10] }}
+            containerComponent={<VictoryContainer responsive={false} />}
         >
             <VictoryAxis />
             <VictoryBar

@@ -5,32 +5,38 @@ import { Link } from 'react-router-dom';
 import { getSubjects } from '@dev/store/subjectsSlice';
 import { getGrades } from '@dev/store/gradesSlice';
 import { getStudents } from '@dev/store/studentsSlice';
+import Drawer from '@mui/material/Drawer';
+import { LeftMenu } from './LeftMenu';
 
 
 
 export const Header: React.FC<{}> = props => {
     const dispatch = useDispatch()
+    const [isOpenMenu, setIsOpenMenu] = React.useState(false);
+
     React.useEffect(() => {
         dispatch(getSubjects())
         dispatch(getGrades())
         dispatch(getStudents('', 1))
     }, [])
 
+    const renderLeftMenu = () => {
+        return <Drawer
+            anchor={'left'}
+            open={isOpenMenu}
+            onClose={() => setIsOpenMenu(false)}
+
+        ><LeftMenu /></Drawer>
+    }
+
     return <div className="header">
-        <div className="row align-center">
+        <div className="row align-center header_wrapper">
             <div className="logo"><Link to={'/'}><img src={logo} alt='logo' /></Link></div>
-            {/* <div className="wrapper_navigation">
-                link link link
-            </div> */}
-        </div>
-        {/* *************** Breadcrumb **************** */}
-        {/* <div className="breadcrumb">
-            <div className="container">
-                <div className="row">
-                    {getPathFromLocation()}
-                </div>
+            <div className="hamburger_menu ml-auto" onClick={() => setIsOpenMenu(true)}>
+                <span></span>
             </div>
-        </div> */}
+        </div>
+        {renderLeftMenu()}
     </div>
 
 }

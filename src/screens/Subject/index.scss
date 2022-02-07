@@ -4,5 +4,9 @@
     
     &_control{
         display: flex;
+        h3{
+            font-size: 1rem;
+            flex: 1;
+        }
     }
 }
