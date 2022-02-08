@@ -21,7 +21,7 @@ export const LeftMenu: React.FC<{}> = props => {
     </div>
 }
 
-const menulist: IMenu[] = [
+export const menulist: IMenu[] = [
     {
         name: 'Tổng quan',
         path: Paths.Overview,

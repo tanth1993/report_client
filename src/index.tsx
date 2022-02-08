@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import logo from '@dev/assets/images/logo.png';
+import favicon from '@dev/assets/images/favicon.png';
 import { Provider } from 'react-redux'
 import store from '@dev/store'
 
@@ -11,7 +11,7 @@ if (!link) {
     link.rel = 'icon';
     document.getElementsByTagName('head')[0].appendChild(link);
 }
-link.href = logo;
+link.href = favicon;
 
 function renderApp() {
     ReactDOM.render(
