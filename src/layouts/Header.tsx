@@ -32,16 +32,16 @@ export const Header: React.FC<{}> = props => {
         let defaultTitle = 'Document'
         switch (pathname) {
             case Paths.Overview:
-                document.title = menulist.find(l => l?.path === Paths.Overview)?.name || defaultTitle
+                document.title = menulist?.find(l => l?.path === Paths.Overview)?.name || defaultTitle
                 break
             case Paths.Grade:
-                document.title = menulist.find(l => l?.path === Paths.Grade)?.name || defaultTitle
+                document.title = menulist?.find(l => l?.path === Paths.Grade)?.name || defaultTitle
                 break
             case Paths.Subject:
-                document.title = menulist.find(l => l?.path === Paths.Subject)?.name || defaultTitle
+                document.title = menulist?.find(l => l?.path === Paths.Subject)?.name || defaultTitle
                 break
             case Paths.Student:
-                document.title = menulist.find(l => l?.path === Paths.Student)?.name || defaultTitle
+                document.title = menulist?.find(l => l?.path === Paths.Student)?.name || defaultTitle
                 break
             default:
                 defaultTitle;
