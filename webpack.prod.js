@@ -6,7 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CssMinimizerPlugins = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const TerserPlugin = require('terser-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = webpackMerge.merge(common, {
   mode: "production",
@@ -36,6 +36,7 @@ module.exports = webpackMerge.merge(common, {
     new webpack.DefinePlugin({
       'process.env.ENVIRONMENT': JSON.stringify('prod')
     }),
+    new CopyPlugin({ patterns: [{ from: "./vercel.json", to: path.resolve(__dirname, "wwwroot") }] })
   ],
   module: {
     rules: [
