@@ -11,7 +11,7 @@ interface IInfoSection {
 const prefixId = '00ST'
 
 export const InfoSection: React.FC<IInfoSection> = props => {
-    const { _id, birthday, isMale, name, studentId } = props.item || {}
+    const { birthday, isMale, name, studentId } = props.item || {}
 
     const renderAvt = () => {
         const genderAvt = isMale ? maleAvt : femaleAvt
