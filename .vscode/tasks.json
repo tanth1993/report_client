@@ -4,7 +4,7 @@
         {
             "label": "start dev",
             "type": "npm",
-            "script": "start",
+            "script": "dev",
             "isBackground": true,
             "problemMatcher": {
                 "owner": "custom",

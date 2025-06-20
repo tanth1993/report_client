@@ -22,7 +22,7 @@
       "./node_modules/@types"
     ], /* List of folders to include type definitions from. */
     "types": [
-      "webpack-env"
+      // "webpack-env"
     ],
     "lib": [
       "dom",

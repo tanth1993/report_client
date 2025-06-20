@@ -1,7 +1,8 @@
 import axios, { AxiosRequestConfig, Method, AxiosError, AxiosResponse } from 'axios'
 
 const port = 3099
-const baseURL = process.env.ENVIRONMENT === 'dev' ? `http://localhost:${port}/api/` : 'https://report-server-api.vercel.app/api/'
+// const baseURL = process.env.ENVIRONMENT === 'dev' ? `http://localhost:${port}/api/` : 'https://report-server-api.vercel.app/api/'
+const baseURL = 'https://report-server-api.vercel.app/api/'
 
 const handleError = (error: AxiosError) => {
     if (error.response) {

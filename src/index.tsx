@@ -23,10 +23,4 @@ function renderApp() {
 
 renderApp();
 
-// Allow Hot Module Replacement
-if (module.hot) {
-    module.hot.accept('./App', () => {
-        renderApp();
-    })
-}
 
